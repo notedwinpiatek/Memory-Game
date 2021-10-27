@@ -24,7 +24,7 @@
     </div>
     <script>
         let cards = Array();
-        let selecion = {};
+        let selection = {};
 
         function init() {
             let cardArray = Array();
@@ -57,6 +57,21 @@
         }
         function flipCard(i) {
             cards[i].isVisible = !cards[i].isVisible;
+            if(selection.first == null) {
+                selection.first = i;
+            } else {
+                selection.second = i;
+
+            if(selection.first == selection.second != null)
+                console.log("dwie identyczne");
+                 selection = {};
+            } else {
+                console.log("dwie różne");
+                console.log(cards[selection.first] + " i " + cards[selection.second].url)
+                cards[selection.first].isVisible = false;
+                cards[selection.second].isVisible = false;
+                selection = {};
+            }
             displayCards();
         }
 
