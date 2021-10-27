@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="pl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        div#cards {
+            margin: 0 auto;
+            width: 750px;
+        }
+
+        div#cards img {
+            margin: 25px;
+        }
+    </style>
+</head>
+
+<body onload="init()">
+    <div id="cards">
+
+    </div>
+    <script>
+        let cards = Array();
+        let selecion = {};
+
+        function init() {
+            let cardArray = Array();
+            for (let i = 0; i < 5; i++) {
+                cardArray.push("card" + i + ".jpg");
+                cardArray.push("card" + i + ".jpg");
+            }
+            let randomArray = Array()
+            while (cardArray.length > 0) {
+                let r = Math.floor(Math.random() * cardArray.length);
+                let randomCard = cardArray.splice(r, 1)[0];
+                randomCard = { 'url': randomCard, 'isVisible': false }
+                randomArray.push(randomCard);
+            }
+            cards = randomArray;
+            displayCards();
+        }
+
+        function displayCards() {
+            let cardDiv = document.getElementById("cards");
+            cardDiv.innerHTML = "";
+            for (let i = 0; i < 10; i++) {
+                if (cards[i].isVisible) {
+                    cardDiv.innerHTML += "<img onClick=\"flipCard("+i+")\" src=\"" + cards[i].url + "\">";
+                } else {
+                    cardDiv.innerHTML += "<img onClick=\"flipCard("+i+")\" src=\"back.jpg\">";
+
+                }
+            }
+        }
+        function flipCard(i) {
+            cards[i].isVisible = !cards[i].isVisible;
+            displayCards();
+        }
+
+        
+
+    </script>
+</body>
+
+</html>
